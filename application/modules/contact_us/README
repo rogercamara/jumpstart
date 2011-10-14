@@ -1,0 +1,22 @@
+This block of code needs to be added to the method of the 
+controller that calls the view that contains the form:
+
+// Check to see if the form has been submitted
+if ($this->session->userdata('msg'))
+{
+	if ($this->session->userdata('err_msg')) 
+	{
+		$data['error_message'] = $this->session->userdata('err_msg');
+		$clear = array('msg'=>'', 'err_msg'=>'');	
+	} 
+	elseif ($this->session->userdata('succ_msg')) 
+	{
+		$data['success_message'] = $this->session->userdata('succ_msg');
+		$clear = array('msg'=>'', 'succ_msg'=>'');
+	}			
+	$this->session->unset_userdata($clear);
+}
+// end of form check block	
+		
+
+Place this if block anywhere before the view is called.
